@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dr. Abdullah Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Professional UI Enhancements - تحديثات التصميم الاحترافي */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: 1px solid var(--border);
+            --hero-bg: linear-gradient(120deg, #1f1212 0%, #1a1a1a 100%); /* Default Dark */
+        }
+        .hero-card-premium {
+            position: relative; overflow: hidden; display: flex; align-items: center; padding: 30px !important;
+            background: var(--hero-bg);
+            transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hero-content-wrapper { z-index: 2; width: 100%; }
+        .hero-badge { background: var(--hover-bg); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .hero-visual-bg { position: absolute; left: -30px; bottom: -40px; font-size: 12rem; opacity: 0.05; color: white; transform: rotate(10deg); pointer-events: none; }
+        
+        .card-header-modern { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: var(--glass-border); }
+        .header-title-box { display: flex; align-items: center; gap: 12px; }
+        .icon-box-modern { width: 38px; height: 38px; border-radius: 10px; background: var(--hover-bg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .lecture-mini-card { display: flex; align-items: center; gap: 15px; padding: 12px; background: var(--glass-bg); border-radius: 12px; border: var(--glass-border); transition: 0.3s ease; cursor: pointer; }
+        .lecture-mini-card:hover { transform: translateY(-3px); background: var(--hover-bg); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .mini-thumb { width: 50px; height: 50px; border-radius: 10px; background: #0f1219; display: flex; align-items: center; justify-content: center; color: white; position: relative; }
+        .play-badge { position: absolute; font-size: 0.8rem; background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+        
+        .admin-notif-panel { background: #151515; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-right: 3px solid var(--primary); display: flex; flex-direction: column; gap: 8px; }
+        .admin-input-dark { background: #151925; border: 1px solid #2d3446; color: white; padding: 8px 12px; border-radius: 6px; font-family: 'Cairo'; font-size: 0.9rem; }
+        .admin-file-label { cursor: pointer; font-size: 0.85rem; color: #aaa; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .admin-file-label:hover { color: white; }
+        
+        .task-input-wrapper { display: flex; gap: 8px; background: var(--glass-bg); padding: 5px; border-radius: 8px; border: var(--glass-border); }
+        .task-input-clean { background: transparent; border: none; color: white; width: 100%; padding: 0 8px; outline: none; font-family: 'Cairo'; }
+        
+        /* Button Groups in Headers */
+        .header-actions-group { display: flex; gap: 5px; }
+        .icon-btn-mini { width: 30px; height: 30px; border-radius: 6px; border: none; background: rgba(255,255,255,0.05); color: #ccc; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
+        .icon-btn-mini:hover { background: var(--primary); color: white; }
+        .icon-btn-mini:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none; /* To prevent hover effects */
+        }
+
+        /* --- Light Mode Specific Overrides --- */
+        body.light-mode {
+            --glass-bg: rgba(0, 0, 0, 0.03); 
+            --glass-border: 1px solid #cbd5e1;
+            /* تدرج رمادي أنيق للحاوية الرئيسية بدلاً من الأبيض */
+            --hero-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        body.light-mode .hero-visual-bg { color: var(--text-main); opacity: 0.05; }
+        body.light-mode .task-input-clean { color: var(--text-main); }
+        body.light-mode .lecture-mini-card { background: #f8fafc; border: 1px solid var(--border); }
+        body.light-mode .lecture-mini-card:hover { background: #ffffff; border-color: var(--primary); }
+        body.light-mode .admin-file-label { color: var(--text-muted); }
+        body.light-mode .admin-file-label:hover { color: var(--primary); }
+        body.light-mode .icon-btn-mini { background: rgba(0,0,0,0.05); color: var(--text-muted); }
+        body.light-mode .icon-btn-mini:hover { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <!-- Student Login Overlay -->
+    <div id="student-login-overlay" class="modal-overlay active">
+        <div class="profile-modal" style="text-align: center;">
+            <div class="logo-container" style="margin-bottom: 1.5rem; justify-content: center;">
+                <div class="icon-wrapper"><i class="fas fa-dna"></i></div>
+                <span class="logo-text">DR. ABDULLAH</span>
+            </div>
+            
+            <div id="main-login-form">
+                <h3 style="margin-bottom: 1.5rem;">تسجيل الدخول</h3>
+                <div class="social-login-buttons">
+                    <button class="social-btn google-btn" onclick="signInWithGoogle()"><i class="fab fa-google"></i> الدخول باستخدام جوجل</button>
+                    <button class="social-btn facebook-btn" onclick="signInWithFacebook()"><i class="fab fa-facebook-f"></i> الدخول باستخدام فيسبوك</button>
+                </div>
+                <a href="#" class="admin-toggle-link" onclick="showAdminLoginView()">تسجيل دخول المسؤول</a>
+            </div>
+
+            <div id="admin-login-form" class="hidden">
+                <h3 style="margin-bottom: 1.5rem;">تسجيل دخول المسؤول</h3>
+                <a href="#" class="admin-toggle-link" onclick="showMainLoginView()">&larr; العودة</a>
+                <input type="email" id="adminEmail" class="admin-input-dark" placeholder="البريد الإلكتروني" style="width:100%; margin-bottom:10px; text-align:center;">
+                <input type="password" id="adminPassword" class="admin-input-dark" placeholder="كلمة المرور" style="width:100%; margin-bottom:15px; text-align:center;">
+                <button onclick="attemptAdminLogin()" class="btn-primary full-width">تسجيل الدخول</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar for Mobile -->
+    <aside class="sidebar" id="mainSidebar">
+        <button class="close-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="logo-container">
+            <div class="icon-wrapper"><i class="fas fa-dna"></i></div>
+            <span class="logo-text">DR. ABDULLAH</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-item active" onclick="switchTab(event, 'home')"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="#" class="nav-item" onclick="switchTab(event, 'lectures')"><i class="fas fa-play-circle"></i> محاضراتي</a>
+            <a href="#" class="nav-item" onclick="switchTab(event, 'notes')"><i class="fas fa-book-open"></i> المذكرات</a>
+            <a href="#" class="nav-item" onclick="switchTab(event, 'photos')"><i class="fas fa-images"></i> صور الحصص</a>
+            <a href="#" class="nav-item" onclick="switchTab(event, 'exams')"><i class="fas fa-graduation-cap"></i> الاختبارات</a>
+            <a href="#" class="nav-item" onclick="switchTab(event, 'reports')"><i class="fas fa-chart-line"></i> تقارير المستوى</a>
+            <a href="#" onclick="showAdminLoginView()" class="admin-access-link"><i class="fas fa-user-cog"></i> دخول المسؤول</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="header-right">
+                <button class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+                <div class="angelic-logo">
+                    <i class="fas fa-fire"></i>
+                    <div class="ticker-wrapper">
+                        <span class="ticker-text">د. عبدالله | منصة الأحياء &nbsp;&nbsp;&nbsp;&nbsp; د. عبدالله | منصة الأحياء &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="header-nav desktop-only">
+                    <a href="#" class="nav-item active" onclick="switchTab(event, 'home')">الرئيسية</a>
+                    <a href="#" class="nav-item" onclick="switchTab(event, 'lectures')">محاضراتي</a>
+                    <a href="#" class="nav-item" onclick="switchTab(event, 'notes')">المذكرات</a>
+                    <a href="#" class="nav-item" onclick="switchTab(event, 'photos')">صور الحصص</a>
+                    <a href="#" class="nav-item" onclick="switchTab(event, 'exams')">الاختبارات</a>
+                    <a href="#" class="nav-item" onclick="switchTab(event, 'reports')">تقارير المستوى</a>
+                </nav>
+            </div>
+
+            <div class="header-left">
+                <div class="header-actions">
+                    <a href="#" onclick="showAdminLoginView()" class="admin-header-btn desktop-only">
+                        <i class="fas fa-user-cog"></i> 
+                        <span>دخول المسؤول</span>
+                    </a>
+                    
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon" id="theme-icon" style="color: var(--primary);"></i>
+                    </button>
+                    
+                    <div class="notifications">
+                        <div class="notif-btn" onclick="toggleNotifications()">
+                            <i class="fas fa-bell" style="color:var(--text-main)"></i>
+                            <span class="notif-badge"></span>
+                        </div>
+                        <div id="notif-menu" class="notif-dropdown hidden">
+                            <div class="notif-header-styled">
+                                <h4>الإشعارات</h4>
+                                <button onclick="markAllRead()" class="mark-read-link">تم القراءة</button>
+                            </div>
+                            <div id="notif-list-container">
+                                <p class="empty-notif-msg">لا توجد إشعارات جديدة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini User Profile -->
+                    <div class="user-header-profile desktop-only" onclick="showProfile()">
+                        <div class="user-avatar-mini"><i class="fas fa-user"></i></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="view-home" class="view-section">
+            <section class="bento-grid">
+                <!-- الحاوية 1: الترحيب والتقدم -->
+                <div class="card hero-card-premium">
+                    <div class="hero-content-wrapper">
+                        <span class="hero-badge">الصف الثالث الثانوي</span>
+                        <h1 style="font-size: 1.8rem; margin-bottom: 10px; line-height: 1.5;">أهلاً بك يا بطل، <br>رحلتك نحو <span class="text-gradient">التفوق</span> تبدأ من هنا</h1>
+                        <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">استمر في التقدم، كل محاضرة تقربك خطوة نحو حلمك.</p>
+                        <button onclick="switchTab(event, 'lectures')" class="btn-primary">
+                            <i class="fas fa-play" style="font-size:0.8rem; margin-left:8px;"></i> استئناف التعلم
+                        </button>
+                    </div>
+                    <div class="hero-visual-bg"><i class="fas fa-microscope"></i></div>
+                </div>
+
+                <!-- الحاوية 2: توجيهات الدكتور -->
+                <div class="card stat-card-premium">
+                    <div class="card-header-modern">
+                        <div class="header-title-box">
+                            <div class="icon-box-modern"><i class="fas fa-bullhorn"></i></div>
+                            <h3>توجيهات الدكتور</h3>
+                        </div>
+                        <div class="admin-visible header-actions-group">
+                            <button onclick="adminAddDirective('text')" class="icon-btn-mini" title="إضافة نص"><i class="fas fa-font"></i></button>
+                            <button onclick="adminAddDirective('image')" class="icon-btn-mini" title="إضافة صورة"><i class="fas fa-image"></i></button>
+                        </div>
+                    </div>
+                    <div id="directives-container" class="scroll-container-premium">
+                        <p id="no-directives" class="empty-text">لا توجد توجيهات جديدة.</p>
+                    </div>
+                </div>
+
+                <!-- الحاوية 3: المحاضرات السريعة -->
+                <div class="card course-card-premium">
+                    <div class="card-header-modern">
+                        <div class="header-title-box">
+                            <div class="icon-box-modern"><i class="fas fa-video"></i></div>
+                            <h3>آخر المحاضرات</h3>
+                        </div>
+                        <a href="#" onclick="switchTab(event, 'lectures')" style="font-size:0.8rem; color:var(--primary);">عرض الكل</a>
+                    </div>
+                    <div id="latest-lecture-card" class="lecture-mini-card" onclick="switchTab(event, 'lectures')">
+                        <div class="mini-thumb">
+                            <img id="latest-lecture-thumb" style="width:100%; height:100%; object-fit:cover; border-radius:10px; display:none;">
+                            <div id="latest-lecture-play-badge" class="play-badge"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div>
+                            <h4 id="latest-lecture-title" style="font-size:0.95rem; margin-bottom:4px;">لا توجد محاضرات جديدة بعد</h4>
+                            <p id="latest-lecture-desc" style="font-size:0.75rem; color:#888;">سيتم إضافة المحاضرات قريباً</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الحاوية 4: خطة اليوم -->
+                <div class="card task-card-premium">
+                    <div class="card-header-modern">
+                        <div class="header-title-box">
+                            <div class="icon-box-modern"><i class="fas fa-tasks"></i></div>
+                            <h3>جدول المذاكرة</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-visible" style="margin-bottom:15px;">
+                        <div class="task-input-wrapper">
+                            <input type="text" id="newTaskInput" class="task-input-clean" placeholder="إضافة مهمة جديدة...">
+                            <button class="btn-primary" onclick="adminAddTask()" style="padding: 5px 12px; border-radius: 6px;"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div id="tasks-container">
+                        <div class="empty-state-msg" id="no-tasks">
+                            <i class="far fa-calendar-check fa-3x"></i>
+                            <p class="bold">لم يتم تحديد جدول اليوم بعد</p>
+                            <p class="text-muted">سيقوم الدكتور بتحديد المهام قريباً.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="view-lectures" class="view-section hidden">
+            <h2 class="section-title">مكتبة المحاضرات</h2>
+            <div class="grid-auto" id="lectures-container">
+                <div class="empty-state-msg" id="lectures-empty">لا توجد محاضرات متاحة حالياً.</div>
+            </div>
+            <button class="fab-add-photo admin-visible" onclick="adminAddLecture()" title="إضافة محاضرة جديدة">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <div id="view-notes" class="view-section hidden">
+            <h2 class="section-title">المذكرات والمراجعات</h2>
+            <div class="grid-auto" id="notes-container">
+                <div class="card add-card-placeholder admin-visible" onclick="adminAddNote()">
+                    <i class="fas fa-file-upload fa-2x"></i>
+                    <span>رفع مذكرة جديدة</span>
+                </div>
+                <div class="empty-state-msg" id="notes-empty">المذكرات ستضاف قريباً.</div>
+            </div>
+        </div>
+
+        <div id="view-photos" class="view-section hidden">
+            <h2 class="section-title">ألبوم صور الحصص</h2>
+            <div class="grid-auto" id="photos-container">
+                <!-- Photos will be added here by JS -->
+                <div class="empty-state-msg" id="photos-empty">معرض الصور فارغ حالياً.</div>
+            </div>
+            <button class="fab-add-photo admin-visible" onclick="adminAddGalleryPhoto()" title="رفع صورة جديدة">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <div id="view-exams" class="view-section hidden">
+            <h2 class="section-title">الاختبارات والواجبات</h2>
+            <div class="card searchable-item">
+                <div class="flex-between-responsive">
+                    <div>
+                        <h3 style="color:var(--accent);">امتحان شامل (البيولوجيا الجزيئية)</h3>
+                        <p class="text-muted-mt">40 سؤال • 60 دقيقة • متاح حتى الخميس</p>
+                    </div>
+                    <button class="btn-primary" onclick="showAlert('فتح نظام الامتحانات...')">بدء الاختبار</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-reports" class="view-section hidden">
+            <h2 class="section-title">تحليل الأداء</h2>
+            <div class="card report-card-center">
+                <i class="fas fa-chart-bar fa-4x report-icon"></i>
+                <h3>أداء ممتاز يا مصطفى!</h3>
+                <p class="text-muted-mt">لقد أتممت 75% من منهج الشهر الحالي.</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="profileModal" class="modal-overlay" onclick="closeProfile(event)">
+        <div class="profile-modal">
+            <div id="student-view">
+                <div class="profile-img-large"><i class="fas fa-user-graduate"></i></div>
+                <h2 class="profile-name-modal">اسم الطالب</h2>
+                <p class="text-muted-mb">الصف الثالث الثانوي - علمي علوم</p>
+                <div class="student-id-box">
+                    <div class="label">رقم الطالب</div>
+                    <div class="id-number">01012345678</div>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn-secondary full-width" style="margin-top:10px;" onclick="logout()">تسجيل الخروج</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+    <!-- Image Viewer Modal -->
+    <div id="imageModal" class="modal-overlay" onclick="closeImageModal(event)">
+        <div class="image-modal-content">
+            <span class="close-modal-btn" onclick="closeImageModal(null)">&times;</span>
+            <img id="modalImage" src="" alt="صورة مكبرة">
+            <div class="image-modal-actions">
+                <a id="downloadImageBtn" href="#" download class="btn-primary">
+                    <i class="fas fa-download"></i> تحميل الصورة
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="modal-overlay" onclick="closeVideoModal(event)">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="modalVideoTitle"></h3>
+                <button class="video-close-btn" onclick="closeVideoModal(null)">
+                    <i class="fas fa-times"></i> إغلاق
+                </button>
+            </div>
+            <div class="video-wrapper">
+                <video id="modalVideo" src="" controls controlsList="nodownload" oncontextmenu="return false;"></video>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
