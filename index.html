@@ -6,6 +6,7 @@
     <title>Dr. Abdullah Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Professional UI Enhancements - تحديثات التصميم الاحترافي */
@@ -69,28 +70,39 @@
 </head>
 <body>
     <!-- Student Login Overlay -->
-    <div id="student-login-overlay" class="modal-overlay active">
-        <div class="profile-modal" style="text-align: center;">
-            <div class="logo-container" style="margin-bottom: 1.5rem; justify-content: center;">
-                <div class="icon-wrapper"><i class="fas fa-dna"></i></div>
-                <span class="logo-text">DR. ABDULLAH</span>
-            </div>
-            
-            <div id="main-login-form">
-                <h3 style="margin-bottom: 1.5rem;">تسجيل الدخول</h3>
-                <div class="social-login-buttons">
-                    <button class="social-btn google-btn" onclick="signInWithGoogle()"><i class="fab fa-google"></i> الدخول باستخدام جوجل</button>
-                    <button class="social-btn facebook-btn" onclick="signInWithFacebook()"><i class="fab fa-facebook-f"></i> الدخول باستخدام فيسبوك</button>
+    <div id="student-login-overlay" class="login-page-overlay active">
+        <div class="login-container">
+            <div class="login-branding">
+                <div class="logo-container" style="background: none; box-shadow: none; border: none; padding: 0;">
+                    <div class="icon-wrapper" style="width: 60px; height: 60px; font-size: 1.8rem; border-radius: 16px;"><i class="fas fa-dna"></i></div>
                 </div>
-                <a href="#" class="admin-toggle-link" onclick="showAdminLoginView()">تسجيل دخول المسؤول</a>
+                <h1 class="branding-title">بوابتك نحو التفوق في الأحياء</h1>
+                <p class="branding-subtitle">انضم إلى آلاف الطلاب الذين حققوا أحلامهم. محاضرات، اختبارات، ومتابعة مستمرة.</p>
             </div>
-
-            <div id="admin-login-form" class="hidden">
-                <h3 style="margin-bottom: 1.5rem;">تسجيل دخول المسؤول</h3>
-                <a href="#" class="admin-toggle-link" onclick="showMainLoginView()">&larr; العودة</a>
-                <input type="email" id="adminEmail" class="admin-input-dark" placeholder="البريد الإلكتروني" style="width:100%; margin-bottom:10px; text-align:center;">
-                <input type="password" id="adminPassword" class="admin-input-dark" placeholder="كلمة المرور" style="width:100%; margin-bottom:15px; text-align:center;">
-                <button onclick="attemptAdminLogin()" class="btn-primary full-width">تسجيل الدخول</button>
+            <div class="login-form-area">
+                <div id="main-login-form">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">تسجيل الدخول</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">أهلاً بك مجدداً! اختر طريقة الدخول المفضلة لديك.</p>
+                    <div class="social-login-buttons">
+                        <button class="social-btn google-btn" onclick="signInWithGoogle()"><i class="fab fa-google"></i> الدخول باستخدام جوجل</button>
+                    </div>
+                    <a href="#" class="admin-toggle-link" onclick="showAdminLoginView()">تسجيل دخول المسؤول</a>
+                </div>
+    
+                <div id="admin-login-form" class="hidden">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">دخول المسؤول</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem;">الرجاء إدخال بيانات الاعتماد الخاصة بك.</p>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="adminEmail" class="form-input" placeholder="البريد الإلكتروني">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="adminPassword" class="form-input" placeholder="كلمة المرور">
+                    </div>
+                    <button onclick="attemptAdminLogin()" class="btn-primary full-width">تسجيل الدخول</button>
+                    <a href="#" class="admin-toggle-link" onclick="showMainLoginView()">&larr; العودة لتسجيل دخول الطالب</a>
+                </div>
             </div>
         </div>
     </div>
@@ -113,6 +125,7 @@
             <a href="#" class="nav-item" onclick="switchTab(event, 'photos')"><i class="fas fa-images"></i> صور الحصص</a>
             <a href="#" class="nav-item" onclick="switchTab(event, 'exams')"><i class="fas fa-graduation-cap"></i> الاختبارات</a>
             <a href="#" class="nav-item" onclick="switchTab(event, 'reports')"><i class="fas fa-chart-line"></i> تقارير المستوى</a>
+            <a href="#" class="nav-item admin-visible" onclick="switchTab(event, 'students')"><i class="fas fa-users"></i> الطلاب</a>
             <a href="#" onclick="showAdminLoginView()" class="admin-access-link"><i class="fas fa-user-cog"></i> دخول المسؤول</a>
         </nav>
     </aside>
@@ -136,6 +149,7 @@
                     <a href="#" class="nav-item" onclick="switchTab(event, 'photos')">صور الحصص</a>
                     <a href="#" class="nav-item" onclick="switchTab(event, 'exams')">الاختبارات</a>
                     <a href="#" class="nav-item" onclick="switchTab(event, 'reports')">تقارير المستوى</a>
+                    <a href="#" class="nav-item admin-visible" onclick="switchTab(event, 'students')">الطلاب</a>
                 </nav>
             </div>
 
@@ -267,7 +281,7 @@
         <div id="view-notes" class="view-section hidden">
             <h2 class="section-title">المذكرات والمراجعات</h2>
             <div class="grid-auto" id="notes-container">
-                <div class="card add-card-placeholder admin-visible" onclick="adminAddNote()">
+                <div class="card add-card-placeholder admin-visible" onclick="adminAddNote()" style="display: none !important;">
                     <i class="fas fa-file-upload fa-2x"></i>
                     <span>رفع مذكرة جديدة</span>
                 </div>
@@ -288,15 +302,13 @@
 
         <div id="view-exams" class="view-section hidden">
             <h2 class="section-title">الاختبارات والواجبات</h2>
-            <div class="card searchable-item">
-                <div class="flex-between-responsive">
-                    <div>
-                        <h3 style="color:var(--accent);">امتحان شامل (البيولوجيا الجزيئية)</h3>
-                        <p class="text-muted-mt">40 سؤال • 60 دقيقة • متاح حتى الخميس</p>
-                    </div>
-                    <button class="btn-primary" onclick="showAlert('فتح نظام الامتحانات...')">بدء الاختبار</button>
-                </div>
+            <div class="grid-auto" id="exams-container">
+                <!-- Exam cards will be populated here by JS -->
+                <div class="empty-state-msg" id="exams-empty">لا توجد اختبارات متاحة حالياً.</div>
             </div>
+            <button class="fab-add-photo admin-visible" onclick="switchTab(event, 'create-exam')" title="إنشاء اختبار جديد">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
 
         <div id="view-reports" class="view-section hidden">
@@ -308,6 +320,200 @@
             </div>
         </div>
     </main>
+
+    <!-- Exam Creation View -->
+    <div id="view-create-exam" class="view-section hidden">
+        <h2 class="section-title">إنشاء اختبار جديد</h2>
+        <div class="exam-creator-container">
+             <!-- تفاصيل الاختبار العلوية -->
+             <div style="margin-bottom: 30px;">
+                 <div class="form-group" style="margin-bottom: 20px;">
+                     <label class="exam-form-label">عنوان الاختبار</label>
+                     <input type="text" id="examTitle" class="exam-form-input" placeholder="مثال: امتحان شامل على المناعة">
+                     <small class="exam-form-hint">سيظهر هذا العنوان للطلاب في قائمة الاختبارات.</small>
+                 </div>
+
+                 <div class="form-row">
+                     <div class="form-group">
+                         <label class="exam-form-label">المدة الزمنية (بالدقائق)</label>
+                         <input type="number" id="examDuration" class="exam-form-input" placeholder="30">
+                     </div>
+                     <div class="form-group">
+                         <label class="exam-form-label">عدد المحاولات المسموحة</label>
+                         <input type="number" id="examAttempts" class="exam-form-input" placeholder="1">
+                     </div>
+                 </div>
+             </div>
+ 
+             <!-- New Question Composer -->
+             <div class="card question-card" id="question-composer">
+                 <div class="question-header">
+                     <h4>إضافة سؤال جديد</h4>
+                 </div>
+                 <div class="question-content">
+                     <textarea id="composer-question-text" class="question-text" placeholder="اكتب نص السؤال هنا..."></textarea>
+                     <div class="question-image-controls">
+                        <div id="composer-preview-container" class="image-preview-container hidden">
+                            <img id="composer-preview-img" />
+                            <button class="remove-image-btn" onclick="removeQuestionImage('composer-image-input', 'composer-preview-container', 'composer-upload-btn')">&times;</button>
+                        </div>
+                        <button id="composer-upload-btn" class="btn-secondary" style="font-size: 0.8rem; padding: 6px 12px; justify-content: center; gap: 8px;" onclick="document.getElementById('composer-image-input').click()">
+                            <i class="fas fa-paperclip"></i> إرفاق صورة (اختياري)
+                        </button>
+                    </div>
+                    <input type="file" id="composer-image-input" accept="image/*" hidden onchange="previewQuestionImage(event, 'composer-preview-img', 'composer-preview-container', 'composer-upload-btn')">
+                </div>
+                <h5>الإجابات (حدد الإجابة الصحيحة):</h5>
+                <div id="composer-answers-container" class="answers-container">
+                     <div class="answer-option">
+                         <input type="radio" name="composer-correct-answer" value="1">
+                         <input type="text" class="answer-text" placeholder="الإجابة 1">
+                     </div>
+                     <div class="answer-option">
+                         <input type="radio" name="composer-correct-answer" value="2">
+                         <input type="text" class="answer-text" placeholder="الإجابة 2">
+                     </div>
+                     <div class="answer-option">
+                         <input type="radio" name="composer-correct-answer" value="3">
+                         <input type="text" class="answer-text" placeholder="الإجابة 3">
+                     </div>
+                     <div class="answer-option">
+                         <input type="radio" name="composer-correct-answer" value="4">
+                         <input type="text" class="answer-text" placeholder="الإجابة 4">
+                     </div>
+                </div>
+                <button class="btn-primary" onclick="addCurrentQuestionToExam()" style="width: 100%; margin-top: 1rem; justify-content: center; gap: 8px;">
+                    <i class="fas fa-plus"></i> إضافة هذا السؤال للقائمة
+                </button>
+             </div>
+ 
+             <h3 class="section-subtitle">الأسئلة المضافة (<span id="question-count">0</span>)</h3>
+             <div id="added-questions-list">
+                 <!-- Summary of added questions will appear here -->
+             </div>
+ 
+             <button class="btn-primary" onclick="saveExam()" style="width: 100%; justify-content: center; gap: 8px;">
+                 <i class="fas fa-save"></i> حفظ ونشر الاختبار
+             </button>
+        </div>
+    </div>
+
+    <!-- Student Exam Taking View (2026) -->
+    <div id="view-take-exam" class="view-section hidden">
+        <div class="exam-taking-container">
+            <!-- Header -->
+            <div class="exam-header">
+                <div class="exam-info">
+                    <h2 id="exam-view-title">عنوان الاختبار</h2>
+                    <div class="exam-progress-bar">
+                        <div id="exam-progress-inner"></div>
+                    </div>
+                </div>
+                <div class="exam-timer-container">
+                    <div id="exam-timer">00:00</div>
+                    <span>الوقت المتبقي</span>
+                </div>
+            </div>
+
+            <!-- Question Area -->
+            <div class="exam-question-area">
+                <h3 id="exam-question-number">السؤال 1 من 20</h3>
+                <p id="exam-question-text">نص السؤال يظهر هنا...</p>
+                <img id="exam-question-image" src="" alt="صورة السؤال" class="hidden">
+                <div id="exam-answers-container" class="exam-answers-grid">
+                    <!-- Answer options will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="exam-navigation">
+                <button id="exam-prev-btn" class="btn-secondary" onclick="navigateExam(-1)"><i class="fas fa-arrow-right"></i> السابق</button>
+                <button id="exam-next-btn" class="btn-primary" onclick="navigateExam(1)">التالي <i class="fas fa-arrow-left"></i></button>
+                <button id="exam-submit-btn" class="btn-primary hidden" onclick="submitExam()">تسليم الاختبار <i class="fas fa-check-circle"></i></button>
+            </div>
+        </div>
+
+        <!-- Question Palette -->
+        <div id="question-palette-container" class="question-palette hidden">
+            <div id="palette-grid" class="palette-grid"></div>
+        </div>
+    </div>
+
+    <!-- Student Exam Result View (Professional) -->
+    <div id="view-exam-result" class="view-section hidden">
+        <div class="result-view-container">
+            <div class="score-circle-container">
+                <svg class="score-circle-svg" viewBox="0 0 160 160">
+                    <circle class="score-circle-bg" cx="80" cy="80" r="70"></circle>
+                    <circle id="result-score-circle" class="score-circle-progress" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="score-text-wrapper">
+                    <span id="result-percentage" class="score-percentage">0%</span>
+                    <span class="score-label">النتيجة النهائية</span>
+                </div>
+            </div>
+            
+            <h2 id="result-message-title" class="result-message">أداء ممتاز!</h2>
+            <p id="result-message-sub" class="result-submessage">لقد اجتزت الاختبار بنجاح.</p>
+
+            <div class="result-stats-grid">
+                <div class="stat-box">
+                    <span id="result-correct-count" class="stat-value" style="color:#10b981">0</span>
+                    <span class="stat-label">إجابات صحيحة</span>
+                </div>
+                <div class="stat-box">
+                    <span id="result-wrong-count" class="stat-value" style="color:#ef4444">0</span>
+                    <span class="stat-label">إجابات خاطئة</span>
+                </div>
+                <div class="stat-box">
+                    <span id="result-total-questions" class="stat-value">0</span>
+                    <span class="stat-label">إجمالي الأسئلة</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="switchTab(event, 'exams')" style="width: 100%;">العودة لقائمة الاختبارات</button>
+        </div>
+    </div>
+
+    <!-- Admin Exam Results Dashboard -->
+    <div id="view-admin-results" class="view-section hidden">
+        <!-- Content injected by JS -->
+    </div>
+
+    <!-- Admin-only view for students -->
+    <div id="view-students" class="view-section hidden">
+        <h2 class="section-title">الطلاب المسجلون</h2>
+        <div class="grid-auto" id="students-container">
+            <!-- Student cards will be populated here by JS -->
+        </div>
+    </div>
+
+    <!-- Complete Profile Modal (For New Students) -->
+    <div id="complete-profile-modal" class="modal-overlay">
+        <div class="profile-modal">
+            <h3 style="margin-bottom: 1.5rem;">استكمال بيانات الطالب</h3>
+            
+            <div class="profile-picture-uploader" onclick="document.getElementById('profilePicInput').click()">
+                <img id="profilePicPreview" src="" alt="Profile Picture" style="display: none;">
+                <div id="profilePicPlaceholder" class="profile-img-large">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="upload-icon"><i class="fas fa-camera"></i></div>
+                <input type="file" id="profilePicInput" hidden accept="image/*" onchange="previewProfilePic(event)">
+            </div>
+
+            <input type="text" id="fullName" class="admin-input-dark" placeholder="الاسم الثلاثي" style="width:100%; margin-bottom:10px;">
+            <input type="tel" id="phoneNumber" class="admin-input-dark" placeholder="رقم الهاتف" style="width:100%; margin-bottom:10px;">
+            
+            <select id="studentDivision" class="admin-input-dark" style="width:100%; margin-bottom:15px; color: #fff;">
+                <option value="" disabled selected>اختر الشعبة</option>
+                <option value="science">علمي علوم</option>
+                <option value="math">علمي رياضة</option>
+            </select>
+
+            <button class="btn-primary full-width" onclick="saveStudentProfile()">حفظ ومتابعة</button>
+        </div>
+    </div>
 
     <div id="profileModal" class="modal-overlay" onclick="closeProfile(event)">
         <div class="profile-modal">
